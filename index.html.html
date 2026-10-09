@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#fff9f4" />
+<title>2026 日本秋季旅行手帳</title>
+<style>
+:root{
+  --ink:#342f2c;
+  --muted:#756b64;
+  --paper:#fffdf9;
+  --bg:#fff9f4;
+  --pink:#f8dbe6;
+  --rose:#f5c3d5;
+  --blue:#dfeefa;
+  --green:#e3f0d9;
+  --yellow:#fff0b8;
+  --lav:#e8e1f7;
+  --peach:#f7e0c7;
+  --mint:#dff3ea;
+  --line:#3c3733;
+  --shadow:5px 6px 0 rgba(60,55,51,.13);
+  --soft:0 8px 24px rgba(79,65,53,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12px 12px, rgba(248,219,230,.62) 2px, transparent 2.1px) 0 0/32px 32px,
+    linear-gradient(180deg,#fffdfb 0%,#fff8f1 100%);
+}
+button,input,textarea{font:inherit}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:980px;margin:0 auto;padding:14px 14px 52px}
+
+/* cover */
+.cover{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#f9dce7 0%,#e4effb 45%,#fff0b8 100%);
+  border:3px solid var(--line);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  padding:20px 18px 18px;
+  margin-bottom:14px;
+}
+.cover:before,.cover:after{
+  content:"";position:absolute;width:90px;height:24px;background:rgba(255,255,255,.62);
+  border:2px solid rgba(60,55,51,.18);transform:rotate(-7deg);top:12px;left:24px;border-radius:4px;
+}
+.cover:after{left:auto;right:26px;top:auto;bottom:16px;transform:rotate(6deg)}
+.cover h1{margin:8px 0 4px;font-size:clamp(2rem,8vw,3.8rem);line-height:1.02;letter-spacing:.01em}
+.cover .subtitle{font-weight:850;font-size:1.05rem;margin:0 0 10px}
+.cover .intro{margin:0;max-width:760px;line-height:1.7}
+.cover-stickers{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.sticker{
+  background:rgba(255,255,255,.82);border:3px solid var(--line);border-radius:20px;padding:10px 8px;
+  display:flex;align-items:center;justify-content:center;gap:6px;flex-direction:column;min-height:92px;box-shadow:3px 4px 0 rgba(60,55,51,.1)
+}
+.sticker span{font-size:.8rem;font-weight:850;text-align:center;line-height:1.2}
+.sticker svg{width:48px;height:48px}
+
+/* controls */
+.controls{display:flex;gap:9px;overflow:auto;padding:5px 0 10px;margin-bottom:8px;scrollbar-width:none}
+.controls::-webkit-scrollbar{display:none}
+.btn{
+  border:3px solid var(--line);background:#fff;border-radius:999px;padding:10px 14px;font-weight:850;white-space:nowrap;
+  box-shadow:3px 4px 0 rgba(60,55,51,.11);cursor:pointer;display:inline-flex;align-items:center;gap:7px
+}
+.btn.active{background:var(--pink)}
+.btn.danger{background:#ffe7e7}
+.btn.primary{background:#fff0b8}
+
+/* nav */
+.day-nav{display:flex;gap:9px;overflow:auto;padding:3px 0 10px;scrollbar-width:none}
+.day-nav::-webkit-scrollbar{display:none}
+.day-nav a{border:3px solid var(--line);background:#fff;border-radius:999px;padding:10px 15px;font-weight:900;white-space:nowrap;box-shadow:3px 4px 0 rgba(60,55,51,.1)}
+
+.note-banner{
+  background:#fff;border:3px dashed var(--line);border-radius:22px;padding:13px 15px;margin-bottom:16px;box-shadow:var(--soft)
+}
+.note-banner strong{display:block;margin-bottom:4px}
+
+/* cards */
+.day-card{border:3px solid var(--line);border-radius:28px;background:var(--paper);box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px;scroll-margin-top:10px}
+.day-head{padding:16px 16px 12px;border-bottom:3px solid var(--line);position:relative;overflow:hidden}
+.day-head::after{content:"";position:absolute;width:115px;height:28px;background:rgba(255,255,255,.56);right:16px;top:10px;transform:rotate(5deg);border:2px solid rgba(60,55,51,.15);border-radius:4px}
+.day-head.pink{background:var(--pink)}
+.day-head.blue{background:var(--blue)}
+.day-head.green{background:var(--green)}
+.day-head.yellow{background:var(--yellow)}
+.day-head.lav{background:var(--lav)}
+.day-head.peach{background:var(--peach)}
+.day-head.mint{background:var(--mint)}
+.day-title-row{display:flex;align-items:flex-start;gap:10px;justify-content:space-between;position:relative;z-index:2}
+.day-title{font-size:1.28rem;font-weight:950;line-height:1.3;margin:0;flex:1}
+.day-date{display:inline-block;background:#fff;border:3px solid var(--line);border-radius:999px;padding:7px 11px;font-size:.9rem;font-weight:900;white-space:nowrap}
+.hotel{display:inline-block;margin-top:10px;background:#fff;border:3px solid var(--line);border-radius:999px;padding:8px 13px;font-weight:850;position:relative;z-index:2}
+.doodle-row{display:flex;gap:8px;overflow:auto;margin-top:12px;padding-bottom:2px;position:relative;z-index:2;scrollbar-width:none}
+.doodle-row::-webkit-scrollbar{display:none}
+.doodle{min-width:82px;background:#fff;border:3px solid var(--line);border-radius:18px;padding:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:2px 3px 0 rgba(60,55,51,.09)}
+.doodle svg{width:42px;height:42px}
+.doodle span{font-size:.76rem;font-weight:850;text-align:center;line-height:1.15}
+
+.body{padding:10px 14px 4px}
+.item{padding:12px 3px 14px;border-bottom:2px dashed #d9d0c7;position:relative}
+.item:last-child{border-bottom:none}
+.item-top{display:flex;align-items:flex-start;gap:10px}
+.time{font-size:1.02rem;font-weight:950;min-width:112px}
+.item-main{flex:1}
+.activity{font-size:1.16rem;font-weight:950;line-height:1.38;margin-bottom:4px}
+.meta{color:var(--muted);font-size:.98rem;line-height:1.5;margin-bottom:9px}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px}
+.tag{display:inline-flex;align-items:center;gap:5px;border:2px solid var(--line);border-radius:999px;background:#fff;padding:6px 10px;font-size:.82rem;font-weight:850}
+.tag.food{background:#fff8cf}.tag.train{background:#e8f3ff}.tag.walk{background:#ebf7e6}.tag.hotel{background:#eee7fb}.tag.shop{background:#ffe8f0}
+.item-actions{display:flex;gap:8px;flex-wrap:wrap}
+.map-link,.small-btn{display:inline-flex;align-items:center;gap:6px;border:3px solid var(--line);border-radius:999px;background:#fff;padding:8px 12px;font-weight:850;cursor:pointer}
+.small-btn{padding:7px 10px;font-size:.9rem}
+.small-btn.delete{background:#ffe7e7}
+.add-row{padding:0 14px 14px}
+
+/* edit mode */
+.edit-only{display:none}
+body.editing .edit-only{display:inline-flex}
+body.editing .editable-view{display:none}
+.editor{display:none;margin-top:8px;gap:8px;flex-direction:column}
+body.editing .editor{display:flex}
+.editor input,.editor textarea{
+  width:100%;border:2px solid #cfc6be;border-radius:12px;padding:9px 10px;background:#fffefa;color:var(--ink)
+}
+.editor textarea{min-height:72px;resize:vertical}
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.day-editor{display:none;margin-top:10px;gap:8px;flex-direction:column;position:relative;z-index:2}
+body.editing .day-editor{display:flex}
+.day-editor input{width:100%;border:2px solid #cfc6be;border-radius:12px;padding:9px 10px;background:#fffefa}
+
+/* scrapbook blocks */
+.scrapbook{
+  margin:18px 0 10px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px
+}
+.scrap{
+  position:relative;background:#fff;border:3px solid var(--line);border-radius:20px;padding:12px;box-shadow:var(--shadow);min-height:150px
+}
+.scrap:nth-child(2){transform:rotate(1.3deg)}
+.scrap:nth-child(3){transform:rotate(-1.1deg)}
+.scrap:before{content:"";position:absolute;width:58px;height:18px;background:rgba(255,241,184,.72);top:-8px;left:calc(50% - 29px);transform:rotate(-3deg);border:1px solid rgba(60,55,51,.15)}
+.scrap svg{width:76px;height:76px;margin:0 auto 8px}
+.scrap h3{margin:0 0 6px;font-size:1rem;text-align:center}
+.scrap p{margin:0;color:var(--muted);font-size:.86rem;text-align:center;line-height:1.45}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);opacity:0;pointer-events:none;background:#342f2c;color:white;padding:10px 16px;border-radius:999px;font-weight:800;transition:.2s;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footer{margin-top:20px;color:var(--muted);font-size:.88rem;text-align:center;line-height:1.6}
+
+@media(max-width:700px){
+  .cover-stickers{grid-template-columns:repeat(4,1fr)}
+  .sticker{min-height:80px;padding:8px 5px}.sticker svg{width:42px;height:42px}
+  .item-top{display:block}.time{min-width:0;margin-bottom:4px}
+  .editor-grid{grid-template-columns:1fr}
+  .scrapbook{grid-template-columns:1fr 1fr}
+}
+@media(max-width:460px){
+  .cover-stickers{grid-template-columns:repeat(2,1fr)}
+  .scrapbook{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="cover">
+    <h1>2026 日本秋季旅行手帳</h1>
+    <p class="subtitle">東京・松本・上高地・輕井澤｜10/25～11/1</p>
+    <p class="intro">這版改成更像旅遊手帳的樣子。每天都有專屬插畫、貼紙感卡片與可編輯行程。修改會儲存在你這台裝置的 Safari 裡，重新整理後仍會保留。</p>
+    <div class="cover-stickers">
+      <div class="sticker"><svg viewBox="0 0 64 64"><path d="M8 34l48-11v8l-18 7-8 18-6-1 4-18-20 4z" fill="#f8dbe6" stroke="#342f2c" stroke-width="3"/></svg><span>飛機</span></div>
+      <div class="sticker"><svg viewBox="0 0 64 64"><rect x="9" y="18" width="46" height="30" rx="7" fill="#dfeefa" stroke="#342f2c" stroke-width="3"/><path d="M18 25h28M22 38h20" stroke="#342f2c" stroke-width="3"/><circle cx="22" cy="51" r="4" fill="#fff" stroke="#342f2c" stroke-width="3"/><circle cx="42" cy="51" r="4" fill="#fff" stroke="#342f2c" stroke-width="3"/></svg><span>列車</span></div>
+      <div class="sticker"><svg viewBox="0 0 64 64"><path d="M10 49h44L37 18 26 31 20 26 10 49z" fill="#e3f0d9" stroke="#342f2c" stroke-width="3"/><path d="M34 14l4 8h-8l4-8z" fill="#e8e1f7" stroke="#342f2c" stroke-width="3"/></svg><span>山景</span></div>
+      <div class="sticker"><svg viewBox="0 0 64 64"><path d="M14 23h36l-3 30H17z" fill="#f8dbe6" stroke="#342f2c" stroke-width="3"/><path d="M24 23c0-5 3-8 8-8s8 3 8 8" stroke="#342f2c" stroke-width="3"/></svg><span>購物</span></div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button class="btn primary" id="editBtn">✏️ 編輯行程</button>
+    <button class="btn edit-only" id="saveBtn">💾 儲存修改</button>
+    <button class="btn edit-only" id="cancelBtn">↩️ 結束編輯</button>
+    <button class="btn" id="exportBtn">⬇️ 匯出 JSON</button>
+    <label class="btn" for="importFile">⬆️ 匯入 JSON</label>
+    <input id="importFile" type="file" accept="application/json" hidden>
+    <button class="btn danger" id="resetBtn">♻️ 還原預設</button>
+  </div>
+
+  <div class="day-nav" id="dayNav"></div>
+  <div class="note-banner"><strong>操作方式</strong>點「編輯行程」後，可以修改時間、行程名稱、交通、備註、Google Maps 連結，也可以新增或刪除行程。修改完成後按「儲存修改」。</div>
+
+  <main id="main"></main>
+
+  <section class="scrapbook">
+    <div class="scrap">
+      <svg viewBox="0 0 100 100"><ellipse cx="50" cy="66" rx="28" ry="15" fill="#dfeefa" stroke="#342f2c" stroke-width="4"/><path d="M25 61c8-8 16-13 25-13s18 5 25 13" stroke="#342f2c" stroke-width="4"/><circle cx="28" cy="28" r="8" fill="#fff0b8" stroke="#342f2c" stroke-width="4"/></svg>
+      <h3>諏訪湖夕陽</h3><p>第二天下午留給湖畔與晚霞，晚餐吃鰻魚飯。</p>
+    </div>
+    <div class="scrap">
+      <svg viewBox="0 0 100 100"><path d="M14 76h72L58 26 36 50l-10-9-12 35z" fill="#e3f0d9" stroke="#342f2c" stroke-width="4"/><path d="M52 20l6 12H46l6-12z" fill="#e8e1f7" stroke="#342f2c" stroke-width="4"/></svg>
+      <h3>上高地</h3><p>大正池、田代池、河童橋，走經典秋季步道。</p>
+    </div>
+    <div class="scrap">
+      <svg viewBox="0 0 100 100"><circle cx="37" cy="63" r="14" fill="#fff" stroke="#342f2c" stroke-width="4"/><circle cx="68" cy="63" r="14" fill="#fff" stroke="#342f2c" stroke-width="4"/><path d="M37 63l14-22h14l6 13h12" stroke="#342f2c" stroke-width="4" stroke-linecap="round"/></svg>
+      <h3>輕井澤單車</h3><p>Hotel Indigo 出發，騎往中輕井澤與星野區。</p>
+    </div>
+  </section>
+
+  <div class="footer">資料只儲存在目前瀏覽器的 localStorage。若換手機或清除網站資料，請先用「匯出 JSON」備份。</div>
+</div>
+<div class="toast" id="toast">已儲存</div>
+
+<script>
+const STORAGE_KEY='japan_trip_2026_scrapbook_v1';
+const colors=['pink','blue','green','yellow','lav','peach','mint','pink'];
+
+const svgIcons={
+  plane:`<svg viewBox="0 0 64 64"><path d="M8 34l48-11v8l-18 7-8 18-6-1 4-18-20 4z" fill="#f8dbe6" stroke="#342f2c" stroke-width="3"/></svg>`,
+  train:`<svg viewBox="0 0 64 64"><rect x="9" y="18" width="46" height="30" rx="7" fill="#dfeefa" stroke="#342f2c" stroke-width="3"/><path d="M18 25h28M22 38h20" stroke="#342f2c" stroke-width="3"/><circle cx="22" cy="51" r="4" fill="#fff" stroke="#342f2c" stroke-width="3"/><circle cx="42" cy="51" r="4" fill="#fff" stroke="#342f2c" stroke-width="3"/></svg>`,
+  mountain:`<svg viewBox="0 0 64 64"><path d="M10 49h44L37 18 26 31 20 26 10 49z" fill="#e3f0d9" stroke="#342f2c" stroke-width="3"/><path d="M34 14l4 8h-8l4-8z" fill="#e8e1f7" stroke="#342f2c" stroke-width="3"/></svg>`,
+  lake:`<svg viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="20" ry="10" fill="#dfeefa" stroke="#342f2c" stroke-width="3"/><path d="M16 39c5-6 10-10 16-10s11 4 16 10" stroke="#342f2c" stroke-width="3"/><circle cx="20" cy="18" r="5" fill="#fff0b8" stroke="#342f2c" stroke-width="3"/></svg>`,
+  food:`<svg viewBox="0 0 64 64"><path d="M16 46h32l-2 10H18z" fill="#f7e0c7" stroke="#342f2c" stroke-width="3"/><path d="M22 24h20c4 0 7 3 7 7v2c0 4-3 7-7 7H22c-4 0-7-3-7-7v-2c0-4 3-7 7-7z" fill="#c89152" stroke="#342f2c" stroke-width="3"/></svg>`,
+  bike:`<svg viewBox="0 0 64 64"><circle cx="18" cy="42" r="10" fill="#fff" stroke="#342f2c" stroke-width="3"/><circle cx="46" cy="42" r="10" fill="#fff" stroke="#342f2c" stroke-width="3"/><path d="M18 42l12-18h11l5 11h8" stroke="#342f2c" stroke-width="3"/></svg>`,
+  hotel:`<svg viewBox="0 0 64 64"><rect x="14" y="18" width="36" height="30" rx="6" fill="#e8e1f7" stroke="#342f2c" stroke-width="3"/><path d="M20 48v6h24v-6M26 18V9h12v9" stroke="#342f2c" stroke-width="3"/></svg>`,
+  shop:`<svg viewBox="0 0 64 64"><path d="M14 23h36l-3 30H17z" fill="#f8dbe6" stroke="#342f2c" stroke-width="3"/><path d="M24 23c0-5 3-8 8-8s8 3 8 8" stroke="#342f2c" stroke-width="3"/></svg>`
+};
+
+const defaults={days:[
+{date:'10/25（日）',title:'台北 → 成田 → 新宿',hotel:'HOTEL AMANEK Shinjuku Kabukicho',icons:[['plane','抵達日本'],['train','N’EX'],['food','拉麵']],items:[
+{time:'14:25～18:30',activity:'CI108 桃園→成田',transport:'中華航空',note:'',map:'https://maps.google.com/?q=Narita+International+Airport',tag:'plane'},
+{time:'18:30～約19:45',activity:'入境、領行李',transport:'機場步行',note:'成田機場第二航廈',map:'https://maps.google.com/?q=Narita+International+Airport+Terminal+2',tag:'walk'},
+{time:'約19:45～20:15',activity:'前往 JR 成田機場站，購買最近一班 N’EX',transport:'步行',note:'拿到行李後再買，不必先綁死班次',map:'https://maps.google.com/?q=Narita+Airport+Terminal+2+Station',tag:'train'},
+{time:'約20:00～21:30',activity:'成田 → 新宿',transport:'N’EX 成田特快',note:'',map:'https://maps.google.com/?q=Shinjuku+Station',tag:'train'},
+{time:'21:30～21:45',activity:'新宿站東口 → AMANEK Check-in',transport:'步行',note:'',map:'https://maps.google.com/?q=HOTEL+AMANEK+Shinjuku+Kabukicho',tag:'hotel'},
+{time:'22:00～23:00',activity:'晚餐：Mitaba 拉麵',transport:'步行',note:'第一晚簡單吃、早點休息',map:'https://maps.google.com/?q=Ramen+Mitaba+Shinjuku',tag:'food'}]},
+{date:'10/26（一）',title:'新宿 → 松本 → 諏訪湖夕陽',hotel:'TABINO HOTEL Lit MATSUMOTO',icons:[['train','Azusa'],['lake','諏訪湖夕陽'],['food','蕎麥麵 / 鰻魚飯']],items:[
+{time:'08:00～10:37',activity:'Azusa 5 新宿→松本（5號車 3C＋3D）',transport:'JR 特急あずさ',note:'',map:'https://maps.google.com/?q=Matsumoto+Station',tag:'train'},
+{time:'10:37～11:10',activity:'前往飯店、寄放行李',transport:'步行',note:'TABINO HOTEL Lit MATSUMOTO',map:'https://maps.google.com/?q=TABINO+HOTEL+Lit+MATSUMOTO',tag:'hotel'},
+{time:'11:30～12:45',activity:'午餐：蕎麥麵',transport:'步行',note:'推薦：Kobayashi Soba（可修改）',map:'https://maps.google.com/?q=Kobayashi+Soba+Matsumoto',tag:'food'},
+{time:'13:00～14:30',activity:'回飯店休息 / Check-in',transport:'步行',note:'為下午諏訪湖保留體力',map:'https://maps.google.com/?q=TABINO+HOTEL+Lit+MATSUMOTO',tag:'hotel'},
+{time:'15:16～15:53',activity:'松本 → 上諏訪',transport:'JR 普通列車',note:'',map:'https://maps.google.com/?q=Kamisuwa+Station',tag:'train'},
+{time:'16:10～17:20',activity:'諏訪湖散步、看夕陽',transport:'步行',note:'主要目的地，安排看晚霞',map:'https://maps.google.com/?q=Lake+Suwa',tag:'walk'},
+{time:'17:30～18:45',activity:'晚餐：鰻魚飯',transport:'步行',note:'推薦：Unabo（可修改）',map:'https://maps.google.com/?q=Unabo+Kamisuwa',tag:'food'},
+{time:'19:00～20:00',activity:'上諏訪 → 松本',transport:'JR 列車',note:'',map:'https://maps.google.com/?q=Matsumoto+Station',tag:'train'}]},
+{date:'10/27（二）',title:'上高地一日',hotel:'TABINO HOTEL Lit MATSUMOTO',icons:[['mountain','上高地山景'],['lake','大正池'],['food','居酒屋']],items:[
+{time:'05:45～06:10',activity:'起床、從飯店出發前往松本站',transport:'步行',note:'',map:'https://maps.google.com/?q=TABINO+HOTEL+Lit+MATSUMOTO',tag:'walk'},
+{time:'06:31～07:01',activity:'松本 → 新島々',transport:'Alpico 上高地線',note:'',map:'https://maps.google.com/?q=Shinshimashima+Station',tag:'train'},
+{time:'07:10～08:04',activity:'新島々 → 大正池（已預約巴士）',transport:'Alpico 巴士',note:'已完成預約',map:'https://maps.google.com/?q=Taisho+Pond+Kamikochi',tag:'train'},
+{time:'08:04～10:40',activity:'大正池 → 田代池 → 河童橋',transport:'健行',note:'',map:'https://maps.google.com/?q=Kappa+Bashi+Bridge+Kamikochi',tag:'walk'},
+{time:'11:20～12:20',activity:'午餐：上高地用餐',transport:'步行',note:'推薦：五千尺廚房（可修改）',map:'https://maps.google.com/?q=Gosenjaku+Kitchen+Kamikochi',tag:'food'},
+{time:'12:20～14:30',activity:'河童橋周邊散步 / 視體力往明神方向走一段',transport:'健行',note:'14:45 前回到巴士站',map:'https://maps.google.com/?q=Kamikochi+Bus+Terminal',tag:'walk'},
+{time:'15:15～17:00左右',activity:'上高地 → 新島々 → 松本（已預約回程）',transport:'巴士＋Alpico 電車',note:'',map:'https://maps.google.com/?q=Matsumoto+Station',tag:'train'},
+{time:'18:30～20:30',activity:'晚餐：居酒屋',transport:'步行',note:'推薦：Shinanonoteppen Matsumoto（可修改）',map:'https://maps.google.com/?q=Shinanonoteppen+Matsumoto',tag:'food'}]},
+{date:'10/28（三）',title:'松本 → 長野 → 輕井澤・Outlet',hotel:'Hotel Indigo Karuizawa',icons:[['train','Shinano / Asama'],['shop','Outlet'],['hotel','飯店時光']],items:[
+{time:'10:06～11:02',activity:'Shinano 3 松本 → 長野',transport:'JR 特急しなの',note:'',map:'https://maps.google.com/?q=Nagano+Station',tag:'train'},
+{time:'11:02～11:28',activity:'長野站轉乘（不用出站）',transport:'站內步行',note:'前往新幹線月台',map:'https://maps.google.com/?q=Nagano+Station',tag:'walk'},
+{time:'11:28～11:59',activity:'Asama 614 長野 → 輕井澤',transport:'北陸新幹線',note:'若仍帶大型行李，可選 6號車 2D＋2E',map:'https://maps.google.com/?q=Karuizawa+Station',tag:'train'},
+{time:'12:20～13:10',activity:'午餐：Outlet 內用餐',transport:'步行',note:'不用刻意離開 Outlet',map:'https://maps.google.com/?q=Karuizawa+Prince+Shopping+Plaza',tag:'food'},
+{time:'13:10～16:30',activity:'Karuizawa Prince Shopping Plaza 購物',transport:'步行',note:'',map:'https://maps.google.com/?q=Karuizawa+Prince+Shopping+Plaza',tag:'shop'},
+{time:'17:00～18:15',activity:'晚餐：輕井澤站附近餐廳',transport:'步行',note:'推薦：Kastanie Rotiserrie（可修改）',map:'https://maps.google.com/?q=Kastanie+Rotisserie+Karuizawa',tag:'food'},
+{time:'18:30～19:00',activity:'前往 Hotel Indigo Karuizawa、Check-in',transport:'接駁車 / 計程車',note:'',map:'https://maps.google.com/?q=Hotel+Indigo+Karuizawa',tag:'hotel'}]},
+{date:'10/29（四）',title:'單車・中輕井澤・星野・飯店時光',hotel:'Hotel Indigo Karuizawa',icons:[['bike','腳踏車'],['mountain','星野區'],['hotel','享受飯店']],items:[
+{time:'07:30～09:00',activity:'飯店早餐',transport:'飯店',note:'',map:'https://maps.google.com/?q=Hotel+Indigo+Karuizawa',tag:'food'},
+{time:'09:00～09:15',activity:'借電動腳踏車',transport:'飯店',note:'建議租電動車',map:'https://maps.google.com/?q=Hotel+Indigo+Karuizawa',tag:'walk'},
+{time:'09:15～10:45',activity:'騎往中輕井澤 / 星野區',transport:'腳踏車',note:'',map:'https://maps.google.com/?q=Hoshino+Area+Karuizawa',tag:'walk'},
+{time:'11:30～12:45',activity:'午餐：中輕井澤咖啡店',transport:'步行',note:'推薦：Sawamura Bakery & Restaurant Harunire Terrace',map:'https://maps.google.com/?q=Sawamura+Harunire+Terrace',tag:'food'},
+{time:'12:45～13:30',activity:'Harunire Terrace 散步 / 咖啡',transport:'步行',note:'可加：丸山咖啡',map:'https://maps.google.com/?q=Harunire+Terrace',tag:'walk'},
+{time:'13:30～14:00',activity:'騎回飯店、還車',transport:'腳踏車',note:'',map:'https://maps.google.com/?q=Hotel+Indigo+Karuizawa',tag:'walk'},
+{time:'14:00～18:30',activity:'享受飯店：休息、泡澡、SPA',transport:'飯店',note:'這天刻意放慢節奏',map:'https://maps.google.com/?q=Hotel+Indigo+Karuizawa',tag:'hotel'},
+{time:'19:00～21:00',activity:'晚餐：KAGARIBI',transport:'飯店',note:'Hotel Indigo 內餐廳',map:'https://maps.google.com/?q=KAGARIBI+Hotel+Indigo+Karuizawa',tag:'food'}]},
+{date:'10/30（五）',title:'雲場池・舊輕井澤 → 東京',hotel:'remm Tokyo Kyobashi',icons:[['lake','雲場池'],['shop','舊輕井澤'],['train','回東京']],items:[
+{time:'07:30～08:30',activity:'Hotel Indigo 早餐',transport:'飯店',note:'',map:'https://maps.google.com/?q=Hotel+Indigo+Karuizawa',tag:'food'},
+{time:'09:00～09:30',activity:'退房、行李寄放 / 宅配處理',transport:'步行',note:'輕井澤站或飯店',map:'https://maps.google.com/?q=Karuizawa+Station',tag:'hotel'},
+{time:'09:45～10:45',activity:'雲場池',transport:'步行 / 計程車',note:'上午光線較好',map:'https://maps.google.com/?q=Kumoba+Pond+Karuizawa',tag:'walk'},
+{time:'11:10～12:00',activity:'舊輕井澤散步',transport:'步行',note:'舊輕井澤銀座通',map:'https://maps.google.com/?q=Old+Karuizawa+Ginza+Street',tag:'shop'},
+{time:'12:00～13:15',activity:'午餐：舊輕井澤餐廳',transport:'步行',note:'推薦：Sawamura Kyu-Karuizawa',map:'https://maps.google.com/?q=Sawamura+KyuKaruizawa',tag:'food'},
+{time:'13:15～14:30',activity:'舊輕井澤續逛 / 咖啡',transport:'步行',note:'之後回車站取行李',map:'https://maps.google.com/?q=Old+Karuizawa+Ginza+Street',tag:'shop'},
+{time:'16:23～17:28',activity:'Asama 624 輕井澤 → 東京',transport:'北陸新幹線',note:'',map:'https://maps.google.com/?q=Tokyo+Station',tag:'train'},
+{time:'17:45～18:10',activity:'東京站 → remm Tokyo Kyobashi Check-in',transport:'步行',note:'',map:'https://maps.google.com/?q=remm+Tokyo+Kyobashi',tag:'hotel'},
+{time:'18:45～20:30',activity:'晚餐：根室花丸 KITTE 丸之內',transport:'步行',note:'可能排隊，這晚只排這個主要行程',map:'https://maps.google.com/?q=Nemuro+Hanamaru+KITTE+Marunouchi',tag:'food'}]},
+{date:'10/31（六）',title:'日本橋・今半・銀座',hotel:'remm Tokyo Kyobashi',icons:[['shop','日本橋'],['food','今半壽喜燒'],['shop','銀座散步']],items:[
+{time:'09:00～11:00',activity:'日本橋散步 / 百貨商圈',transport:'步行',note:'日本橋高島屋、日本橋、三越一帶',map:'https://maps.google.com/?q=Nihonbashi+Tokyo',tag:'shop'},
+{time:'11:30～13:15',activity:'午餐：人形町今半 銀座店',transport:'步行 / 地鐵',note:'建議：一份特上ロース＋一份極上ロース午間套餐',map:'https://maps.google.com/?q=Ningyocho+Imahan+Ginza',tag:'food'},
+{time:'13:15～17:30',activity:'銀座散步、百貨、購物',transport:'步行',note:'銀座三越、GINZA SIX、伊東屋、中央通',map:'https://maps.google.com/?q=Ginza+Tokyo',tag:'shop'},
+{time:'18:30～19:45',activity:'晚餐：未定',transport:'步行',note:'視中午今半吃得多不多再決定',map:'https://maps.google.com/?q=Ginza+Tokyo',tag:'food'}]},
+{date:'11/01（日）',title:'東京 → 成田 → 台北',hotel:'—',icons:[['food','早餐咖啡'],['train','N’EX'],['plane','返台']],items:[
+{time:'07:30～08:30',activity:'早餐：飯店附近咖啡店',transport:'步行',note:'京橋周邊',map:'https://maps.google.com/?q=Kyobashi+Tokyo+Cafe',tag:'food'},
+{time:'08:30～09:45',activity:'回飯店整理行李',transport:'步行',note:'remm Tokyo Kyobashi',map:'https://maps.google.com/?q=remm+Tokyo+Kyobashi',tag:'hotel'},
+{time:'09:45～10:20',activity:'退房、前往東京站',transport:'步行',note:'',map:'https://maps.google.com/?q=Tokyo+Station',tag:'walk'},
+{time:'約10:30～11:40',activity:'東京 → 成田',transport:'N’EX 成田特快',note:'',map:'https://maps.google.com/?q=Narita+International+Airport',tag:'train'},
+{time:'14:35～17:45',activity:'CI101 成田 → 台北',transport:'中華航空',note:'',map:'https://maps.google.com/?q=Narita+International+Airport',tag:'plane'}]}
+]};
+
+let data=loadData();
+let draft=null;
+let editing=false;
+
+function clone(x){return JSON.parse(JSON.stringify(x));}
+function loadData(){
+  try{const s=localStorage.getItem(STORAGE_KEY);return s?JSON.parse(s):clone(defaults)}catch(e){return clone(defaults)}
+}
+function saveData(){localStorage.setItem(STORAGE_KEY,JSON.stringify(data));showToast('已儲存修改')}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1700)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function tagLabel(t){return ({food:'🍽️ 用餐',train:'🚆 交通',walk:'🌿 散步',hotel:'🏨 住宿',shop:'🛍️ 購物',plane:'✈️ 飛行'})[t]||'📌 行程'}
+function iconHTML(icon,label){return `<div class="doodle">${svgIcons[icon]||svgIcons.shop}<span>${esc(label)}</span></div>`}
+
+function renderNav(){
+ const nav=document.getElementById('dayNav');nav.innerHTML='';
+ data.days.forEach((d,i)=>{const a=document.createElement('a');a.href='#day'+i;a.textContent=d.date.split('（')[0];nav.appendChild(a)})
+}
+
+function render(){
+ document.body.classList.toggle('editing',editing);
+ renderNav();
+ const main=document.getElementById('main');main.innerHTML='';
+ const source=editing?draft:data;
+ source.days.forEach((day,di)=>{
+   const card=document.createElement('section');card.className='day-card';card.id='day'+di;
+   const icons=(day.icons||[]).map(([i,l])=>iconHTML(i,l)).join('');
+   card.innerHTML=`
+   <div class="day-head ${colors[di%colors.length]}">
+     <div class="day-title-row"><h2 class="day-title editable-view">${esc(day.date)}｜${esc(day.title)}</h2><span class="day-date">DAY ${di+1}</span></div>
+     <div class="hotel editable-view">住宿：${esc(day.hotel)}</div>
+     <div class="day-editor">
+       <input data-day-field="date" value="${esc(day.date)}" placeholder="日期">
+       <input data-day-field="title" value="${esc(day.title)}" placeholder="當日主題">
+       <input data-day-field="hotel" value="${esc(day.hotel)}" placeholder="住宿">
+     </div>
+     <div class="doodle-row">${icons}</div>
+   </div>
+   <div class="body"></div>
+   <div class="add-row edit-only"><button class="btn" data-add-row>＋ 新增行程</button></div>`;
+   const body=card.querySelector('.body');
+   day.items.forEach((it,ii)=>{
+     const row=document.createElement('div');row.className='item';
+     row.innerHTML=`
+       <div class="editable-view">
+         <div class="item-top"><div class="time">${esc(it.time)}</div><div class="item-main"><div class="activity">${esc(it.activity)}</div><div class="meta">交通：${esc(it.transport)}${it.note?`<br>${esc(it.note)}`:''}</div></div></div>
+         <div class="tags"><span class="tag ${esc(it.tag)}">${tagLabel(it.tag)}</span></div>
+         <div class="item-actions"><a class="map-link" href="${esc(it.map)}" target="_blank" rel="noopener">📍 Google Maps</a></div>
+       </div>
+       <div class="editor">
+         <div class="editor-grid"><input data-field="time" value="${esc(it.time)}" placeholder="時間"><input data-field="transport" value="${esc(it.transport)}" placeholder="交通方式"></div>
+         <input data-field="activity" value="${esc(it.activity)}" placeholder="行程名稱">
+         <textarea data-field="note" placeholder="備註">${esc(it.note)}</textarea>
+         <input data-field="map" value="${esc(it.map)}" placeholder="Google Maps 連結">
+         <div class="editor-grid"><input data-field="tag" value="${esc(it.tag)}" placeholder="分類：food/train/walk/hotel/shop"><button class="small-btn delete" data-delete>刪除此行程</button></div>
+       </div>`;
+     row.querySelectorAll('[data-field]').forEach(el=>el.addEventListener('input',()=>{draft.days[di].items[ii][el.dataset.field]=el.value}));
+     row.querySelector('[data-delete]')?.addEventListener('click',()=>{draft.days[di].items.splice(ii,1);render()});
+     body.appendChild(row);
+   });
+   card.querySelectorAll('[data-day-field]').forEach(el=>el.addEventListener('input',()=>{draft.days[di][el.dataset.dayField]=el.value}));
+   card.querySelector('[data-add-row]').addEventListener('click',()=>{draft.days[di].items.push({time:'',activity:'新行程',transport:'',note:'',map:'https://maps.google.com/',tag:'walk'});render()});
+   main.appendChild(card);
+ });
+}
+
+function enterEdit(){editing=true;draft=clone(data);document.getElementById('editBtn').classList.add('active');render();showToast('已進入編輯模式')}
+function exitEdit(save){
+ if(save){data=clone(draft);saveData()}
+ editing=false;draft=null;document.getElementById('editBtn').classList.remove('active');render();
+}
+
+document.getElementById('editBtn').addEventListener('click',()=>{editing?exitEdit(false):enterEdit()});
+document.getElementById('saveBtn').addEventListener('click',()=>exitEdit(true));
+document.getElementById('cancelBtn').addEventListener('click',()=>exitEdit(false));
+document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('確定要還原成預設行程嗎？')){data=clone(defaults);localStorage.setItem(STORAGE_KEY,JSON.stringify(data));editing=false;draft=null;render();showToast('已還原預設行程')}});
+document.getElementById('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='japan-trip-2026.json';a.click();URL.revokeObjectURL(a.href)});
+document.getElementById('importFile').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{data=JSON.parse(r.result);localStorage.setItem(STORAGE_KEY,JSON.stringify(data));editing=false;draft=null;render();showToast('匯入成功')}catch(err){alert('JSON 格式不正確')}};r.readAsText(f)});
+render();
+</script>
+</body>
+</html>
